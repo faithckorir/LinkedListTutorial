@@ -107,6 +107,16 @@ class SinglyLinkedList {
             current = current.next
         }
     }
+    fun printMiddle(){
+        var slow = head
+        var fast = head
+        while(fast?.next != null){
+            fast = fast.next?.next
+            slow = slow?.next
+
+        }
+        println(slow?.data)
+    }
 
     fun removeByHushing(){
         //time complexity 0(n)
@@ -133,13 +143,32 @@ class SinglyLinkedList {
         if(head == null){
             return 0
         }
-        var count = 1
+        var count = 0
         var current = head
-        while(current?.next != null){
+        while(current != null){
             count++
             current = current.next
+
         }
 
         return count
     }
+    fun detectLoop(){
+        var current = head
+        val hs = HashSet<Node>()
+
+        while(current != null){
+
+            if(hs.contains(current)){
+                println("There is  a loop")
+                return
+            }else{
+                hs.add(current)
+            }
+            current = current.next
+        }
+        println("No Loop")
+    }
+
+
 }
