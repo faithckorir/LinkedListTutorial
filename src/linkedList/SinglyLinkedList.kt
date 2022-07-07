@@ -129,4 +129,17 @@ class SinglyLinkedList {
             current = current.next
         }
     }
+    fun length():Int{
+        if(head == null){
+            return 0
+        }
+        var count = 1
+        var current = head
+        while(current?.next != null){
+            count++
+            current = current.next
+        }
+
+        return count
+    }
 }

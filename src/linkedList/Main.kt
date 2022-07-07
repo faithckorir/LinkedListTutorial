@@ -30,6 +30,7 @@ fun main() {
     list.insertNode(4)
     list.removeByHushing()
     list.print()
+    println(list.length())
 
 
 }
