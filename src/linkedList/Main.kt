@@ -24,11 +24,11 @@ fun main() {
     list.print()*/
 
     println("working with duplicates")
-    list.insertNode(34)
-    list.insertNode(34)
+    list.insertNode(3)
+    list.insertNode(3)
     list.insertNode(3)
     list.insertNode(4)
-    list.removeDups()
+    list.removeByHushing()
     list.print()
 
 
