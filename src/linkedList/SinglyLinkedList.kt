@@ -71,15 +71,16 @@ class SinglyLinkedList {
         }
     }
 
-    fun rDups(){
-       var current = head
+    fun rDups() {
+        var current = head
 
-        while(current!= null){
+        while (current != null) {
             var temp = current
 
-            while(temp != null
-                && temp.data == current.data){
-                temp =temp.next
+            while (temp != null
+                && temp.data == current.data
+            ) {
+                temp = temp.next
             }
             current.next = temp
             current = current.next
@@ -93,7 +94,7 @@ class SinglyLinkedList {
 
         /* Pick elements one by one */
         var current = head
-        var prev :Node? = null
+        var prev: Node? = null
         while (current != null) {
             val curval = current.data
 
@@ -107,10 +108,11 @@ class SinglyLinkedList {
             current = current.next
         }
     }
-    fun printMiddle(){
+
+    fun printMiddle() {
         var slow = head
         var fast = head
-        while(fast?.next != null){
+        while (fast?.next != null) {
             fast = fast.next?.next
             slow = slow?.next
 
@@ -118,19 +120,19 @@ class SinglyLinkedList {
         println(slow?.data)
     }
 
-    fun removeByHushing(){
+    fun removeByHushing() {
         //time complexity 0(n)
         //space complexity O(1)
         var current = head
-        var prev : Node? = null
+        var prev: Node? = null
         val hashSet = HashSet<Int>()
-        while(current != null){
+        while (current != null) {
             val data = current.data
 
-            if(hashSet.contains(data)){
+            if (hashSet.contains(data)) {
                 prev?.next = current.next
 
-            }else{
+            } else {
                 hashSet.add(data)
                 prev = current
             }
@@ -139,13 +141,14 @@ class SinglyLinkedList {
             current = current.next
         }
     }
-    fun length():Int{
-        if(head == null){
+
+    fun length(): Int {
+        if (head == null) {
             return 0
         }
         var count = 0
         var current = head
-        while(current != null){
+        while (current != null) {
             count++
             current = current.next
 
@@ -153,21 +156,68 @@ class SinglyLinkedList {
 
         return count
     }
-    fun detectLoop(){
+
+    fun detectLoopByHashing() {
+        //time complexity O(n)
+        //space complexity O(n) additional hashset
         var current = head
         val hs = HashSet<Node>()
 
-        while(current != null){
+        while (current != null) {
 
-            if(hs.contains(current)){
+            if (hs.contains(current)) {
                 println("There is  a loop")
                 return
-            }else{
+            } else {
                 hs.add(current)
             }
             current = current.next
         }
         println("No Loop")
+    }
+
+
+    fun detectLoopByFloydsMethod() {
+        var slow_pointer = head
+        var fast_pointer = head
+
+        while (fast_pointer?.next != null) {
+            if (slow_pointer == fast_pointer) {
+                println("yes looop")
+                return
+            } else {
+                fast_pointer = fast_pointer.next?.next
+                slow_pointer = slow_pointer?.next
+            }
+        }
+        println("No Loop")
+    }
+
+    fun countNodesinLoop(list: Node?): Int {
+        var slow_p = list
+        var fast_p = list
+        while (slow_p != null && fast_p != null && fast_p.next != null) {
+            slow_p = slow_p.next
+            fast_p = fast_p.next!!.next
+
+            /* If slow_p and fast_p meet at some point
+        then there is a loop */if (slow_p == fast_p) return countNodes(slow_p)
+        }
+
+        /* Return 0 to indicate that there is no loop*/return 0
+    }
+
+    private fun countNodes(slowP: Node?): Int {
+
+        var count = 1
+        var current = slowP
+        while(current != slowP){
+            count++
+            current = current?.next
+        }
+
+        return count
+
     }
 
 
